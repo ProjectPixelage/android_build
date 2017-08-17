@@ -506,6 +506,8 @@ function _lunch_meat()
     local release=$2
     local variant=$3
 
+    check_product $product $release
+
     TARGET_PRODUCT=$product \
     TARGET_RELEASE=$release \
     TARGET_BUILD_VARIANT=$variant \
@@ -525,6 +527,8 @@ function _lunch_meat()
     export TARGET_BUILD_TYPE=release
 
     [[ -n "${ANDROID_QUIET_BUILD:-}" ]] || echo
+
+    fixup_common_out_dir
 
     set_stuff_for_environment
     [[ -n "${ANDROID_QUIET_BUILD:-}" ]] || printconfig
